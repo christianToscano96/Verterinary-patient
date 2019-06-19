@@ -49,7 +49,7 @@ class App extends Component {
 
   render() { 
     return ( 
-      <div class="container">
+      <div className="container">
         <Header
           titulo='Administrador Pacientes Veterinaria'
         />
