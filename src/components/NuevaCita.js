@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 
+//creamos una propiedad inicial
+const stateInicial = {
+    cita : {
+        mascota : '',
+        propietario : '',
+        fecha : '',
+        hora : '',
+        sintomas : ''
+    },
+    error: false
+}
 class NuevaCita extends Component {
-    state = { 
-        cita : {
-            mascota : '',
-            propietario : '',
-            fecha : '',
-            hora : '',
-            sintomas : ''
-        },
-        error: false
-     }
+    state = { ...stateInicial }
 
      //metodos
      //cuando el usuario escribe en los inputs
@@ -41,16 +44,33 @@ class NuevaCita extends Component {
                 //detener la ejecucion
                 return;
             }
-         //agregar la cita al state de App
+         //grnerar objeto con los datos
+         const nuevaCita = {...this.state.cita};
+         nuevaCita.id = uuid();
+
+         //agregar la cita al state de App o comuncarnos con la funcion crear nevacita
+         this.props.crearNuevaCita(nuevaCita)
+
+        //clocar en el stae el stateInicial
+        this.setState({
+            ...stateInicial
+        })
+
      }
 
     render() { 
+
+        //extraert el valor de state
+        const { error } = this.state;
+
         return ( 
             <div className="card mt-5 py-5">
                 <div className="card-body">
                     <h2 className="card-title text-center mb-5">
                         Llena el formulario para crear una nueva cita
                     </h2>
+
+                    { error ? <div className="alert alert-danger mt-2 mb-5 text-center">Todos los campos son obligatorios</div> : null}
 
                     <form
                         onSubmit={this.handleSubmit}
@@ -80,9 +100,9 @@ class NuevaCita extends Component {
                                     type="text"
                                     className="form-control"
                                     placeholder="Nombre Dueño Mascota"
-                                    name="propieario"
+                                    name="propietario"
                                     onChange={this.handleChange}
-                                    value={this.state.cita.propieario}
+                                    value={this.state.cita.propietario}
                                 />
                             </div>
                          </div>{/*form-group */}
@@ -131,7 +151,7 @@ class NuevaCita extends Component {
                             </div>
                          </div>{/*form-group */}
 
-                         <input type="submit" className="py-3 mt-2 btn btn-primary btn-block" value="Agreagar nueva Cita" />
+                         <input type="submit" className="py-3 mt-2 btn btn-primary btn-block rounded-pill" value="Agreagar nueva Cita" />
                     </form>
                 </div>
             </div>
