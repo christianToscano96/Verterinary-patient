@@ -64,7 +64,7 @@ class NuevaCita extends Component {
         const { error } = this.state;
 
         return ( 
-            <div className="card mt-5 py-5">
+            <div className="card mt-5 py-5 rounded shadow">
                 <div className="card-body">
                     <h2 className="card-title text-center mb-5">
                         Llena el formulario para crear una nueva cita
@@ -151,7 +151,7 @@ class NuevaCita extends Component {
                             </div>
                          </div>{/*form-group */}
 
-                         <input type="submit" className="py-3 mt-2 btn btn-primary btn-block rounded-pill" value="Agreagar nueva Cita" />
+                         <input type="submit" className="shadow py-3 mt-2 btn btn-primary btn-block rounded-pill" value="Agreagar nueva Cita" />
                     </form>
                 </div>
             </div>
